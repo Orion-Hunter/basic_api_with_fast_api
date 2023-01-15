@@ -1,0 +1,30 @@
+version: "3.4"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/backend.dockerfile
+    container_name: api
+    restart: unless-stopped
+    ports:
+      - ${DOCKER_WEB_PORT-7000}:80
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - database
+    environment:
+      MODULE_NAME: app.api.entrypoint
+  
+  database:
+    image: postgres:12-alpine
+    container_name: database
+    restart: unless-stopped
+    ports:
+      - ${DATABASE_PORT:-5432}:${DATABASE_PORT:-5432}
+    volumes:
+       - ../app-resources/database:/var/lib/postgresql/data:z
+       - ../app-resources/database_backup:/home/database_backup:z
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pandora}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
