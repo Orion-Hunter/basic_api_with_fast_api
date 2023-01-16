@@ -1,3 +1,5 @@
 from uuid import UUID
 
-__all__ = ["UUID"]
+from .logger import LogLevels
+
+__all__ = ["UUID", "LogLevels"]

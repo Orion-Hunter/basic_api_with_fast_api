@@ -14,7 +14,7 @@ services:
       - database
     environment:
       MODULE_NAME: app.api.entrypoint
-  
+
   database:
     image: postgres:12-alpine
     container_name: database
@@ -22,9 +22,9 @@ services:
     ports:
       - ${DATABASE_PORT:-5432}:${DATABASE_PORT:-5432}
     volumes:
-       - ../app-resources/database:/var/lib/postgresql/data:z
-       - ../app-resources/database_backup:/home/database_backup:z
+      - ../app-resources/database:/var/lib/postgresql/data:z
+      - ../app-resources/database_backup:/home/database_backup:z
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-pandora}
+      POSTGRES_DB: ${POSTGRES_DB:-database_integracao}
       POSTGRES_USER: ${POSTGRES_USER:-admin}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}

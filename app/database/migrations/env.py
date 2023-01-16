@@ -20,6 +20,7 @@ config.set_main_option("sqlalchemy.url", str(DATABASE_URL))
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
 
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
@@ -32,7 +33,7 @@ target_metadata = Base.metadata
 # ... etc.
 
 
-def run_migrations_offline():
+def run_migrations_offline():  # type: ignore
     """Run migrations in 'offline' mode.
 
     This configures the context with just a URL
@@ -56,7 +57,7 @@ def run_migrations_offline():
         context.run_migrations()
 
 
-def do_run_migrations(connection):
+def do_run_migrations(connection):  # type: ignore
     context.configure(connection=connection, target_metadata=target_metadata)
 
     with context.begin_transaction():
@@ -84,6 +85,6 @@ async def run_migrations_online():
 
 
 if context.is_offline_mode():
-    run_migrations_offline()
+    run_migrations_offline()  # type: ignore
 else:
-    asyncio.run(run_migrations_online())
+    asyncio.run(run_migrations_online())  # type: ignore
