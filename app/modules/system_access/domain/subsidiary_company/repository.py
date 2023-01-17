@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import Optional
+
+from result import Result
 
 from app.modules.system_access.domain.subsidiary_company.subsidiary_company import (
     SubsidiaryCompany,
@@ -14,8 +16,8 @@ class SubsidiaryCompanyRepo(ABC):
 
     @abstractmethod
     async def get(
-        self, parent_company_id: UUID, subsidiary_company_id: List[UUID]
-    ) -> Optional[List[SubsidiaryCompany]]:
+        self, parent_company_id: UUID, subsidiary_company_id: UUID
+    ) -> Optional[SubsidiaryCompany]:
         ...
 
     @abstractmethod
@@ -23,5 +25,7 @@ class SubsidiaryCompanyRepo(ABC):
         ...
 
     @abstractmethod
-    async def delete(self, subsidiary_company_id: UUID) -> None:
+    async def delete(
+        self, parent_company_id: UUID, subsidiary_company_id: UUID
+    ) -> Result[None, None]:
         ...

@@ -12,7 +12,7 @@ class SubsidiaryCompany(AggregateRoot):
     parent_company_id: UUID
     company_name: str
     company_cnpj: str = Field(min_length=14, max_length=14)
-    address: Optional[Address] = Field(default=None)
+    address: Address
     company_phone: str
 
     @classmethod
@@ -21,8 +21,8 @@ class SubsidiaryCompany(AggregateRoot):
         parent_company_id: UUID,
         company_name: str,
         company_phone: str,
+        address: Address,
         company_cnpj: str = Field(min_length=14, max_length=14),
-        address: Optional[Address] = Field(default=None),
     ) -> "SubsidiaryCompany":
 
         subsidiary_company = SubsidiaryCompany(

@@ -608,17 +608,6 @@ files = [
 ]
 
 [[package]]
-name = "logging"
-version = "0.4.9.6"
-description = "A logging module for Python"
-category = "main"
-optional = false
-python-versions = "*"
-files = [
-    {file = "logging-0.4.9.6.tar.gz", hash = "sha256:26f6b50773f085042d301085bd1bf5d9f3735704db9f37c1ce6d8b85c38f2417"},
-]
-
-[[package]]
 name = "mako"
 version = "1.2.4"
 description = "A super-fast templating language that borrows the best ideas from the existing templating languages."
@@ -962,6 +951,21 @@ files = [
     {file = "PyYAML-6.0-cp39-cp39-win_amd64.whl", hash = "sha256:b3d267842bf12586ba6c734f89d1f5b871df0273157918b0ccefa29deb05c21c"},
     {file = "PyYAML-6.0.tar.gz", hash = "sha256:68fb519c14306fec9720a2a5b45bc9f0c8d1b9c72adf45c37baedfcd949c35a2"},
 ]
+
+[[package]]
+name = "result"
+version = "0.9.0"
+description = "A Rust-like result type for Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "result-0.9.0-py3-none-any.whl", hash = "sha256:2dd342c13fbf28d207c3f466f01a7915c6ee0d1fe3235fd9ba2041d36de498c1"},
+    {file = "result-0.9.0.tar.gz", hash = "sha256:cc4147c824221e8326d143a55065ec17b6337a9c0dda7700f7f947ca33ac63fd"},
+]
+
+[package.dependencies]
+typing-extensions = {version = "*", markers = "python_version < \"3.10\""}
 
 [[package]]
 name = "six"
@@ -1475,4 +1479,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1"
-content-hash = "923873c931eeeaa33db16e31dc4cf032c9f9ce94d5103eb838dc44b5fa42899c"
+content-hash = "042a4e75ed82ce1549397ddea03e6108ed23631e9fcefb99a48d420a10f9d7bb"

@@ -37,7 +37,7 @@ class SubsidiaryCompany(Base):
     state = Column(String(2), nullable=True)
     district = Column(String, nullable=True)
     number = Column(Integer, nullable=True)
-    company_phone: str
+    company_phone = Column(String, nullable=False)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(
