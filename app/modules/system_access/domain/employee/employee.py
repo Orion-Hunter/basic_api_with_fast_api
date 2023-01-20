@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from uuid import UUID
 
 from pydantic import EmailStr, Field
@@ -12,10 +12,11 @@ class Employee(AggregateRoot):
     parent_company_id: Optional[UUID]
     name: str
     email: EmailStr
-    password: Optional[str]
+    password: Optional[str] = Field(default=None)
     cpf: str = Field(min_length=11, max_length=11)
     phone: str
-    address: Optional[Address]
+    address: Address
+    subsidiaries: Optional[List[UUID]]
 
     @classmethod
     def create(
@@ -25,7 +26,8 @@ class Employee(AggregateRoot):
         email: EmailStr,
         password: Optional[str],
         phone: str,
-        address: Optional[Address],
+        address: Address,
+        subsidiaries: Optional[List[UUID]],
         cpf: str = Field(min_length=11, max_length=11),
     ) -> "Employee":
         employee = Employee(
@@ -36,6 +38,7 @@ class Employee(AggregateRoot):
             phone=phone,
             address=address,
             cpf=cpf,
+            subsidiaries=subsidiaries,
         )
 
         return employee

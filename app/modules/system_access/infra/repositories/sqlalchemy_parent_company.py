@@ -11,7 +11,7 @@ from ...domain.parent_company import ParentCompany, ParentCompanyRepo
 from ...domain.value_objects import Address
 
 
-class SqlAlachemyParentCompanyRepo(ParentCompanyRepo):
+class SqlAlchemyParentCompanyRepo(ParentCompanyRepo):
     def __init__(self, session: AsyncSession):
         super().__init__()
         self._session = session

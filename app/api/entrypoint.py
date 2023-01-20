@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 
 from app.api.controllers import index
-from app.config.main import settings
+from app.config.main import container, settings
 
 app = FastAPI(
     title="Pandora Insights",
@@ -11,6 +11,8 @@ app = FastAPI(
     openapi_url=settings.OPENAPI_URL,
     version="0.0.0",
 )
+
+app.container = container
 
 app.include_router(
     prefix="/v1",

@@ -9,8 +9,8 @@ from .subsidiary_company import SubsidiaryCompanyRepo
 class AbstractUnitOfWork(ABC):
 
     employee_repo: EmployeeRepo
-    parent_company: ParentCompanyRepo
-    subsidiary_company: SubsidiaryCompanyRepo
+    parent_repo: ParentCompanyRepo
+    subsidiary_repo: SubsidiaryCompanyRepo
 
     async def __aenter__(self) -> "AbstractUnitOfWork":
         return self

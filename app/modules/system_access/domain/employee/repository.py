@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import EmailStr
+from result import Result
 
 from app.shared.domain import UUID
 
@@ -14,11 +15,15 @@ class EmployeeRepo(ABC):
         ...
 
     @abstractmethod
-    async def get(self, parent_company_id: Optional[UUID]) -> Optional[List[Employee]]:
+    async def get(
+        self, parent_company_id: Optional[UUID], employee_id: UUID
+    ) -> Optional[Employee]:
         ...
 
     @abstractmethod
-    async def get_by_email(self, email: EmailStr) -> Optional[Employee]:
+    async def get_by_email(
+        self, parent_company_id: Optional[UUID], email: EmailStr
+    ) -> Optional[Employee]:
         ...
 
     @abstractmethod
@@ -26,5 +31,7 @@ class EmployeeRepo(ABC):
         ...
 
     @abstractmethod
-    async def delete(self, employee_id: UUID) -> None:
+    async def delete(
+        self, parent_company_id: Optional[UUID], employee_id: UUID
+    ) -> Result[None, None]:
         ...
