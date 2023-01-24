@@ -5,6 +5,7 @@ from pydantic import EmailStr, Field
 
 from app.shared.domain.aggregates import AggregateRoot
 
+from ..events import EmployeeRegistered
 from ..value_objects import Address
 
 
@@ -39,6 +40,15 @@ class Employee(AggregateRoot):
             address=address,
             cpf=cpf,
             subsidiaries=subsidiaries,
+        )
+
+        employee._record_domain_event(
+            domain_event=EmployeeRegistered(
+                parent_company_id=parent_company_id,
+                aggregate_type=Employee.__name__,
+                aggregate_id=employee.id,
+                email=employee.email,
+            )
         )
 
         return employee

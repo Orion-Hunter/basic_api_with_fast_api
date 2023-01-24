@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import EmailStr
 from result import Result
@@ -10,6 +10,12 @@ from .employee import Employee
 
 
 class EmployeeRepo(ABC):
+
+    events_to_send: List[Employee]
+
+    def __init__(self) -> None:
+        self.events_to_send = []
+
     @abstractmethod
     async def insert(self, employee: Employee) -> None:
         ...

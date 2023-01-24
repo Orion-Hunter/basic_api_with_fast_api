@@ -2,6 +2,8 @@ from typing import Any, Callable, Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.shared.infra.repositories.sqlalchemy_outbox import SqlAlchemyOutboxLocalRepo
+
 from ..domain.abstract_uow import AbstractUnitOfWork
 from .repositories import (
     SqlAlchemyEmployeeRepo,
@@ -24,6 +26,7 @@ class SqlAlchemyUnitOfWork(AbstractUnitOfWork):
             self.parent_repo = SqlAlchemyParentCompanyRepo(session=session)
             self.subsidiary_repo = SqlAlchemySubsidiaryCompanyRepo(session=session)
             self.employee_repo = SqlAlchemyEmployeeRepo(session=session)
+            self.outbox_repo = SqlAlchemyOutboxLocalRepo(session=session)
 
             return await super().__aenter__()
 
@@ -45,3 +48,8 @@ class SqlAlchemyUnitOfWork(AbstractUnitOfWork):
             return None
 
         await self._session.rollback()
+
+    async def _dispatch_domain_events(self) -> None:
+        events = []
+        events.extend(self.collect_new_events())
+        await self.outbox_repo.insert(events)

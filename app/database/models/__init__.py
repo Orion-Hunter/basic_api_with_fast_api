@@ -1,3 +1,4 @@
+from .shared import OutboxMessage
 from .system_access import (
     Employee,
     EmployeeSubsidiaryCompaniesReference,
@@ -10,4 +11,5 @@ __all__ = [
     "SubsidiaryCompany",
     "Employee",
     "EmployeeSubsidiaryCompaniesReference",
+    "OutboxMessage",
 ]

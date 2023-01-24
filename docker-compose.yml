@@ -28,3 +28,22 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-database_integracao}
       POSTGRES_USER: ${POSTGRES_USER:-admin}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - /rabbitmq/data/:/var/lib/rabbitmq/
+      - /rabbitmq/log/:/var/lib/rabbitmq/log
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    restart: always
+
+# volumes:
+#   logs-folder:
+#     name: ${log_rabbitmq}
+#     driver: local

@@ -2,6 +2,7 @@ from .base_class import Base
 from .models import (
     Employee,
     EmployeeSubsidiaryCompaniesReference,
+    OutboxMessage,
     ParentCompany,
     SubsidiaryCompany,
 )
@@ -12,4 +13,5 @@ __all__ = [
     "SubsidiaryCompany",
     "Employee",
     "EmployeeSubsidiaryCompaniesReference",
+    "OutboxMessage",
 ]
